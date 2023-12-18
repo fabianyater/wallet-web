@@ -1,11 +1,13 @@
-import { Link } from "react-router-dom";
 import Button from "../../Button";
 import Input from "../../Input";
-import styles from "./styles.module.css";
+import FormBase from "../FormBase";
 
 const LoginForm = () => {
   return (
-    <form className={styles.form}>
+    <FormBase
+      footerText={"¿No tienes una cuenta aún? Create una nueva "}
+      link={"signup"}
+    >
       <Input
         name={"username"}
         type={"text"}
@@ -21,12 +23,8 @@ const LoginForm = () => {
         placeholder={"********"}
         required
       />
-      <Button text={"Iniciar sesión"} type={"submit"} />
-      <p className={styles.signupText}>
-        ¿No tiene una cuenta aún? Create una nueva{" "}
-        <Link to={"signup"}>aquí</Link>
-      </p>
-    </form>
+      <Button text={"Iniciar sesión"} title={"Iniciar sesión"} type={"submit"} hideText={false} />
+    </FormBase>
   );
 };
 
