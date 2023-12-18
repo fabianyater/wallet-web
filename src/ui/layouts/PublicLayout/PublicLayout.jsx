@@ -17,7 +17,6 @@ export default function PublicLayout({ children }) {
           hideText
           onClick={toggleTheme}
           onlyIcon
-          theme={theme}
           title={"Cambiar tema"}
           icon={theme === "dark" ? "lightTheme" : "darkTheme"}
         />

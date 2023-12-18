@@ -1,13 +1,15 @@
 import { useContext, useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
 import './App.css';
 import { ThemeContext } from './context/ThemeProvider';
+import PrivateLayout from './ui/layouts/PrivateLayout';
 import PublicLayout from './ui/layouts/PublicLayout';
-import { Outlet } from 'react-router-dom';
+import AuthContext from './context/AuthProvider';
 
 function App() {
-  const { theme } = useContext(ThemeContext)
-  const token = localStorage.getItem("token");
-  const Layout = token ? null : PublicLayout
+  const { theme } = useContext(ThemeContext);
+  const { auth } = useContext(AuthContext);
+  const Layout = auth.token ? PrivateLayout : PublicLayout
 
   useEffect(() => {
     document.body.setAttribute('data-theme', theme);
