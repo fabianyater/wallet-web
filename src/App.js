@@ -2,10 +2,12 @@ import { useContext, useEffect } from 'react';
 import './App.css';
 import { ThemeContext } from './context/ThemeProvider';
 import PublicLayout from './ui/layouts/PublicLayout';
-import LoginPage from './ui/pages/public/LoginPage';
+import { Outlet } from 'react-router-dom';
 
 function App() {
-  const { theme, toggleTheme } = useContext(ThemeContext)
+  const { theme } = useContext(ThemeContext)
+  const token = localStorage.getItem("token");
+  const Layout = token ? null : PublicLayout
 
   useEffect(() => {
     document.body.setAttribute('data-theme', theme);
@@ -13,9 +15,9 @@ function App() {
 
   return (
     <div data-theme={theme}>
-      <PublicLayout>
-        <LoginPage />
-      </PublicLayout>
+      <Layout>
+        <Outlet />
+      </Layout>
     </div>
   );
 }
