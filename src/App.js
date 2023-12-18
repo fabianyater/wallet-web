@@ -1,6 +1,8 @@
 import { useContext, useEffect } from 'react';
 import './App.css';
 import { ThemeContext } from './context/ThemeProvider';
+import PublicLayout from './ui/layouts/PublicLayout';
+import LoginPage from './ui/pages/public/LoginPage';
 
 function App() {
   const { theme, toggleTheme } = useContext(ThemeContext)
@@ -11,8 +13,9 @@ function App() {
 
   return (
     <div data-theme={theme}>
-      <button onClick={toggleTheme}>Cambiar tema</button>
-      <h1>El tema actual es: {theme}</h1>
+      <PublicLayout>
+        <LoginPage />
+      </PublicLayout>
     </div>
   );
 }

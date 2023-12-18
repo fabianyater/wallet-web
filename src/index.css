@@ -10,7 +10,11 @@
 }
 
 body {
+  margin: 0;
   background: var(--background-color);
   color: var(--text-color);
   transition: background-color 0.3s ease, color 0.3s ease;
+
+  font-family: "Noto Sans JP", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
