@@ -1,16 +1,22 @@
 :root {
   --background-color: #ffffff;
   --text-color: #000000;
+  --button-color: #0BD08A;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 [data-theme="dark"] {
   --background-color: #171717;
   --text-color: #ffffff;
+  --button-color: #fff
 }
 
 body {
+  margin: 0;
   background: var(--background-color);
   color: var(--text-color);
   transition: background-color 0.3s ease, color 0.3s ease;
+
+  font-family: "Noto Sans JP", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
