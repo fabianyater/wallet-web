@@ -20,6 +20,7 @@ const Input = ({
         placeholder={placeholder}
         required={required}
         autoComplete={autoComplete}
+        {...register(name, { required: true })}
       />
     </label>
   );
@@ -30,7 +31,7 @@ Input.propTypes = {
   type: PropTypes.string,
   label: PropTypes.string,
   required: PropTypes.bool,
-  autoComplete: PropTypes.string,
+  autoComplete: PropTypes.bool,
   placeholder: PropTypes.string,
 };
 
