@@ -4,18 +4,19 @@
   align-items: center;
   justify-content: center;
   gap: 20px;
-  background-color: #fff;
+  background-color: var(--button-color);
   border-radius: 10px;
   padding: 5px 30px;
   cursor: pointer;
   transition: all ease-in-out 0.3s;
   border: none;
+  height: 48px;
 
   & span {
     margin: 0;
     color: #1c1c1c;
     font-family: Poppins;
-    font-size: 24px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
@@ -24,5 +25,19 @@
   &:hover {
     background-color: #dbdbdb;
     transition: all ease-in-out 0.3s;
+  }
+}
+
+.button[data-only-icon="true"] {
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.button[data-theme="light"] {
+  background-color: #000;
+  & svg {
+    & path {
+      stroke: #fff;
+    }
   }
 }
