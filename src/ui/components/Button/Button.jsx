@@ -1,6 +1,9 @@
+import "ldrs/ring2";
+import PropTypes from "prop-types";
+import { useContext } from "react";
+import { ThemeContext } from "../../../context/ThemeProvider";
 import SvgIcon from "../SvgIcon";
 import styles from "./styles.module.css";
-import PropTypes from "prop-types";
 
 const Button = ({
   text,
@@ -10,10 +13,10 @@ const Button = ({
   onClick,
   isLoading,
   onlyIcon,
-  theme,
-  title
+  title,
 }) => {
-  console.log(hideText);
+  const { theme } = useContext(ThemeContext);
+
   return (
     <button
       className={styles.button}
@@ -24,7 +27,7 @@ const Button = ({
       title={title}
     >
       {isLoading ? (
-        "Cargando..."
+        <p>Cargando...</p>
       ) : (
         <>
           {hideText ? null : <span>{text}</span>}
