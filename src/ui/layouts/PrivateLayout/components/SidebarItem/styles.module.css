@@ -1,0 +1,69 @@
+.listItem {
+  width: 100%;
+
+  & a {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 35px;
+    padding: 20px 5px;
+    width: 100%;
+    font-size: 0.775rem;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+
+    & svg {
+      height: 24px;
+      width: 24px;
+    }
+
+    &:hover {
+      background-color: #262626;
+      color: #0bd08a;
+      border-radius: 5px;
+      text-decoration: none;
+
+      & svg {
+        & path {
+          stroke: #0bd08a;
+        }
+      }
+    }
+
+    & span {
+      padding: 0;
+      margin: 0;
+      width: 100%;
+    }
+  }
+}
+
+.listItem[data-active="true"] {
+  & a {
+    background-color: #262626;
+    border-radius: 5px;
+    color: #0bd08a;
+    text-decoration: none;
+
+    & svg {
+      & path {
+        stroke: #0bd08a;
+      }
+    }
+  }
+}
+
+/* TODO: dejar solos los iconos */
+/* @media screen and (max-width: 1200px) {
+  .listItem {
+    & a {
+      & span {
+        display: none;
+      }
+    }
+  }
+}
+ */

@@ -1,0 +1,37 @@
+.header {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height);
+  background-color: #1c1c1c;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  padding: 0 20px;
+  grid-area: header;
+}
+
+.hamburgerIcon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  & button {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .hamburgerIcon {
+    & button {
+      display: block;
+      background-color: transparent;
+
+      &:focus-visible {
+        outline: none;
+      }
+    }
+  }
+}
