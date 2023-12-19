@@ -1,8 +1,8 @@
 import { useContext, useRef } from "react";
 import { SidebarContext } from "../../../context/SidebarProvider";
-import styles from "./styles.module.css";
-import useOutsideClick from "../../../hooks/useOutsideClick";
 import useEscapeKey from "../../../hooks/useEscapeKey";
+import useOutsideClick from "../../../hooks/useOutsideClick";
+import styles from "./styles.module.css";
 
 const Avatar = ({ avatar, square, children, onClick }) => {
   const { isDropdownAvatarOpen, toggleDropdownAvatar } =

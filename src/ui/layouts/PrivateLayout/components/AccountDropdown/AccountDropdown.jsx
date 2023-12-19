@@ -1,14 +1,37 @@
 import { useContext } from "react";
+import { AccountsContext } from "../../../../../context/AccountsProvider";
 import { SidebarContext } from "../../../../../context/SidebarProvider";
 import Dropdown from "../../../../components/Dropdown";
 import DropdownContainer from "../../../../components/DropdownContainer";
 import DropdownItem from "../../../../components/DropdownItem";
 
-const AccountDropdown = ({ data }) => {
-  const { isDropdownOpen } = useContext(SidebarContext);
+const AccountDropdown = () => {
+  const { isDropdownOpen, toggleDropdown } = useContext(SidebarContext);
+
+  const { accounts, selectedAccount, updateSelectedAccount, isPending } =
+    useContext(AccountsContext);
+
+  let accountNameDisplay;
+  if (isPending) {
+    accountNameDisplay = "Cargando...";
+  } else if (selectedAccount && accounts.length > 0) {
+    const currentAccount = accounts.find(
+      (account) => account.accountId === selectedAccount
+    );
+    accountNameDisplay = currentAccount
+      ? currentAccount.accountName
+      : "Cuenta no encontrada";
+  } else {
+    accountNameDisplay = "Sin cuentas";
+  }
+
+  const onAccountChange = (newAccountId) => {
+    updateSelectedAccount(newAccountId);
+    toggleDropdown();
+  };
 
   return (
-    <Dropdown>
+    <Dropdown accountName={accountNameDisplay}>
       <DropdownContainer
         isOpen={isDropdownOpen}
         header={
@@ -16,11 +39,12 @@ const AccountDropdown = ({ data }) => {
         }
         footer={<DropdownItem icon={"plus"} title={"Agregar nueva cuenta"} />}
       >
-        {data.map((data) => (
+        {accounts.map((account, key) => (
           <DropdownItem
-            isAvatar={data.value}
-            key={data.id}
-            title={data.value}
+            isAvatar={account.accountName}
+            key={key}
+            title={account.accountName}
+            onClick={() => onAccountChange(account.accountId)}
           />
         ))}
       </DropdownContainer>

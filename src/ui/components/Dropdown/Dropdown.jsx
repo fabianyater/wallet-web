@@ -6,7 +6,7 @@ import Avatar from "../Avatar";
 import SvgIcon from "../SvgIcon";
 import styles from "./styles.module.css";
 
-const Dropdown = ({ children }) => {
+const Dropdown = ({ accountName, children }) => {
   const { isDropdownOpen, toggleDropdown } = useContext(SidebarContext);
   const ref = useRef(null);
 
@@ -15,15 +15,13 @@ const Dropdown = ({ children }) => {
   });
   useEscapeKey(isDropdownOpen, () => toggleDropdown());
 
-  const accountName = "Bancolombia";
-
   return (
     <div className={styles.dropdown} data-open={isDropdownOpen} ref={ref}>
       <button className={styles.button} onClick={toggleDropdown}>
         <Avatar avatar={accountName} square />
         <span className={styles.text}>
           <span>Seleccionar cuenta</span>
-          <p className={styles.selectedAccount}>Bancolombia</p>
+          <p className={styles.selectedAccount}>{accountName}</p>
         </span>
         <SvgIcon icon={isDropdownOpen ? "chevronDown" : "chevronUp"} />
       </button>
