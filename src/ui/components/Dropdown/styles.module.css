@@ -1,0 +1,62 @@
+.dropdown {
+  box-sizing: border-box;
+  margin: 20px 0;
+  width: 100%;
+  position: relative;
+  border-radius: 5px;
+
+  .button {
+    width: 100%;
+    background-color: transparent;
+    height: 52px;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .text {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+
+    & span:first-child {
+      font-size: 12px;
+      color: #8f8d8d;
+      text-align: left;
+    }
+
+    .selectedAccount {
+      color: #fff;
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      font-weight: 600;
+      margin: 0;
+      text-overflow: ellipsis;
+    }
+  }
+
+  & svg {
+    width: 2.25rem;
+    height: 2.25rem;
+    color: rgba(113, 113, 122, 1);
+    transition: all ease-in-out 0.3s;
+  }
+
+  &:focus {
+    border: none;
+  }
+
+  &:hover {
+    background-color: #171717;
+  }
+}
+
+.dropdown[data-open="true"] {
+  background-color: #171717;
+
+}
