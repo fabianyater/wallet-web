@@ -29,6 +29,7 @@ const SignUpForm = () => {
     <>
       <Toaster position="top-center" />
       <FormBase
+        showFooter
         footerText={"¿Ya tienes una cuenta? Inicia sesión "}
         link={"/"}
         handleSumbit={handleSubmit(onSubmit)}

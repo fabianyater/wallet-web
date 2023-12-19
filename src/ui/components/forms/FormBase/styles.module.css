@@ -4,6 +4,8 @@
   flex-direction: column;
   justify-content: space-between;
   border-radius: 20px;
+  max-width: 400px;
+  width: 100%;
 
   .footerText {
     font-weight: 300;
