@@ -44,6 +44,7 @@ const LoginForm = () => {
     <>
       <Toaster position="top-center" />
       <FormBase
+        showFooter
         footerText={"¿No tienes una cuenta aún? Create una nueva "}
         link={"signup"}
         handleSumbit={handleSubmit(onSubmit)}
