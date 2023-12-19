@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AccountsContext } from "../../../../../context/AccountsProvider";
 import Spinner from "../../../../components/Spinner";
+import CreateFirstAccountPage from "../../../../pages/private/CreateFirstAccountPage";
 
 const AccountChecker = ({ children }) => {
   const { hasAccounts, isPending } = useContext(AccountsContext);
@@ -10,7 +11,7 @@ const AccountChecker = ({ children }) => {
   }
 
   if (!hasAccounts()) {
-    return <h1>Crear cuenta</h1>; // Aquí puedes colocar tu formulario
+    return <CreateFirstAccountPage />; // Aquí puedes colocar tu formulario
   }
 
   return <>{children}</>;
