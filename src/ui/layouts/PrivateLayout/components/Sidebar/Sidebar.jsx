@@ -3,7 +3,6 @@ import AuthContext from "../../../../../context/AuthProvider";
 import { SidebarContext } from "../../../../../context/SidebarProvider";
 import useEscapeKey from "../../../../../hooks/useEscapeKey";
 import useOutsideClick from "../../../../../hooks/useOutsideClick";
-import { accounts } from "../../../../../utilities/dropdownOptions";
 import { privateRoutes } from "../../../../../utilities/paths";
 import AccountDropdown from "../AccountDropdown";
 import SidebarItem from "../SidebarItem/SidebarItem";
@@ -28,7 +27,7 @@ const Sidebar = () => {
       <div className={styles.logo}>
         <h1 className={styles.title}>Wallet</h1>
       </div>
-      <AccountDropdown data={accounts} />
+      <AccountDropdown />
       <nav className={styles.navbar}>
         <ul className={styles.list}>
           {privateRoutes.map((item, index) => (
