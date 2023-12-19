@@ -1,8 +1,9 @@
-import { useContext, useState } from "react";
-import Button from "../../../../components/Button";
-import styles from "./styles.module.css";
+import { useContext } from "react";
 import AuthContext from "../../../../../context/AuthProvider";
 import { SidebarContext } from "../../../../../context/SidebarProvider";
+import Button from "../../../../components/Button";
+import ToggleTheme from "../../../../components/ToggleTheme/ToggleTheme";
+import styles from "./styles.module.css";
 
 const Header = () => {
   const { toggleSidebar } = useContext(SidebarContext);
@@ -20,7 +21,10 @@ const Header = () => {
           type={"button"}
         />
       </div>
-      <h2>Logged as: {username}</h2>
+      <h2 className={styles.greet}>Bienvenida/o, <span>{username}</span></h2>
+      <div className={styles.headerOptions}>
+        <ToggleTheme />
+      </div>
     </header>
   );
 };
