@@ -1,14 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styles from "./styles.module.css";
 import SvgIcon from "../../../../components/SvgIcon";
 
-const SidebarItem = ({ label, path, icon, isActive, onClick }) => {
+const SidebarItem = ({ label, path, icon, onClick }) => {
+  const location = useLocation();
+  const isActive = (route) => location.pathname === route;
+
   return (
     <li
       key={path}
       className={styles.listItem}
       title={label}
-      data-active={isActive}
+      data-active={isActive(path)}
       onClick={onClick}
     >
       <Link to={path}>

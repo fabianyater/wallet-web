@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { ThemeContext } from "../../../context/ThemeProvider";
 import SvgIcon from "../SvgIcon";
 import styles from "./styles.module.css";
+import Spinner from "../Spinner";
 
 const Button = ({
   text,
@@ -27,7 +28,7 @@ const Button = ({
       title={title}
     >
       {isLoading ? (
-        <p>Cargando...</p>
+        <Spinner />
       ) : (
         <>
           {hideText ? null : <span>{text}</span>}

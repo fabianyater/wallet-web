@@ -1,16 +1,17 @@
-import { useLocation } from "react-router-dom";
-import styles from "./styles.module.css";
-import SidebarItem from "../SidebarItem/SidebarItem";
-import { privateRoutes } from "../../../../../utilities/paths";
 import { useContext, useRef } from "react";
+import AuthContext from "../../../../../context/AuthProvider";
 import { SidebarContext } from "../../../../../context/SidebarProvider";
-import useOutsideClick from "../../../../../hooks/useOutsideClick";
 import useEscapeKey from "../../../../../hooks/useEscapeKey";
+import useOutsideClick from "../../../../../hooks/useOutsideClick";
+import { accounts } from "../../../../../utilities/dropdownOptions";
+import { privateRoutes } from "../../../../../utilities/paths";
+import AccountDropdown from "../AccountDropdown";
+import SidebarItem from "../SidebarItem/SidebarItem";
+import styles from "./styles.module.css";
 
 const Sidebar = () => {
-  const location = useLocation();
   const { isSidebarOpen, toggleSidebar } = useContext(SidebarContext);
-  const isActive = (route) => location.pathname === route;
+  const { logout } = useContext(AuthContext);
   const ref = useRef(null);
 
   useOutsideClick(ref, () => {
@@ -18,32 +19,37 @@ const Sidebar = () => {
   });
   useEscapeKey(isSidebarOpen, () => toggleSidebar());
 
-
   return (
     <aside
       className={styles.sidebar}
       data-toggle-sidebar={isSidebarOpen}
       ref={ref}
     >
-      <div>
-        <div className={styles.logo}>
-          <h1 className={styles.title}>Wallet</h1>
-        </div>
-        <nav className={styles.navbar}>
-          <ul className={styles.list}>
-            {privateRoutes.map((item, index) => (
-              <SidebarItem
-                key={index}
-                path={item.route}
-                icon={item.icon}
-                isActive={isActive(item.route)}
-                onClick={toggleSidebar}
-                label={item.label}
-              />
-            ))}
-          </ul>
-        </nav>
+      <div className={styles.logo}>
+        <h1 className={styles.title}>Wallet</h1>
       </div>
+      <AccountDropdown data={accounts} />
+      <nav className={styles.navbar}>
+        <ul className={styles.list}>
+          {privateRoutes.map((item, index) => (
+            <SidebarItem
+              key={index}
+              path={item.route}
+              icon={item.icon}
+              onClick={toggleSidebar}
+              label={item.label}
+            />
+          ))}
+        </ul>
+        <ul className={styles.list}>
+          <SidebarItem icon={"profile"} label={"Perfil"} />
+          <SidebarItem
+            icon={"logout"}
+            label={"Cerrar sesión"}
+            onClick={logout}
+          />
+        </ul>
+      </nav>
     </aside>
   );
 };

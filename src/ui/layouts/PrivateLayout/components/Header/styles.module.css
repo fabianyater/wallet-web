@@ -3,13 +3,33 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: var(--header-height);
+  height: 65px;
   background-color: #1c1c1c;
   position: sticky;
   top: 0;
   width: 100%;
   padding: 0 20px;
   grid-area: header;
+
+  .headerOptions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .greet {
+    width: 100%;
+    text-align: left;
+    margin: 0;
+    font-weight: 400;
+    font-size: clamp(1rem, 1.2vw, 3rem);
+
+    & span {
+      font-weight: 600;
+      color: #0bd08a;
+    }
+  }
 }
 
 .hamburgerIcon {
@@ -17,14 +37,13 @@
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-
-  & button {
-    display: none;
-  }
+  display: none;
 }
 
 @media screen and (max-width: 1200px) {
   .hamburgerIcon {
+    display: block;
+
     & button {
       display: block;
       background-color: transparent;

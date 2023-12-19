@@ -1,0 +1,16 @@
+.avatar {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  padding: 20px;
+  cursor: pointer;
+  background-position: 50%;
+  background-size: cover;
+  position: relative;
+}
+
+.avatar[data-square="true"] {
+  border-radius: 5px;
+}

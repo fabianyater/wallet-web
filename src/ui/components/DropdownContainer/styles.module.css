@@ -1,0 +1,20 @@
+.container {
+  position: absolute;
+  width: 100%;
+  background-color: #171717;
+  margin-top: 10px;
+  border-radius: 5px;
+  display: none;
+  border: 1px solid rgb(82, 82, 82);
+}
+
+.container[data-menu="true"] {
+  display: block;
+}
+
+.container[data-avatar-open="true"] {
+  display: block;
+  width: 165px;
+  right: 20px;
+  top: 100%;
+}

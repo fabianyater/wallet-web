@@ -1,4 +1,4 @@
-import { BudgetIcon, CategoriesIcon, DarkIcon, DebtIcon, GoalIcon, HomeIcon, LightIcon, MenuIcon, MovementIcon, Wallet02Icon, WalletIcon } from "./SvgIcon";
+import { BudgetIcon, CategoriesIcon, ChevronDownIcon, ChevronUpIcon, DarkIcon, DebtIcon, GoalIcon, HomeIcon, LightIcon, LogoutIcon, MenuIcon, MovementIcon, PlusIcon, SettingsIcon, UserIcon, Wallet02Icon, WalletIcon } from "./SvgIcon";
 
 const icons = {
   lightTheme: LightIcon,
@@ -12,6 +12,12 @@ const icons = {
   goal: GoalIcon,
   debt: DebtIcon,
   movement: MovementIcon,
+  chevronUp: ChevronUpIcon,
+  chevronDown: ChevronDownIcon,
+  settings: SettingsIcon,
+  plus: PlusIcon,
+  logout: LogoutIcon,
+  profile: UserIcon
 }
 
 export default icons;

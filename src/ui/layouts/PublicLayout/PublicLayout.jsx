@@ -1,25 +1,11 @@
-import { useContext, useEffect } from "react";
-import { ThemeContext } from "../../../context/ThemeProvider";
-import Button from "../../components/Button";
+import ToggleTheme from "../../components/ToggleTheme/ToggleTheme";
 import styles from "./styles.module.css";
 
 export default function PublicLayout({ children }) {
-  const { theme, toggleTheme } = useContext(ThemeContext);
-
-  useEffect(() => {
-    document.body.setAttribute("data-theme", theme);
-  }, [theme]);
-
   return (
     <section className={styles.section}>
       <div className={styles.theme}>
-        <Button
-          hideText
-          onClick={toggleTheme}
-          onlyIcon
-          title={"Cambiar tema"}
-          icon={theme === "dark" ? "lightTheme" : "darkTheme"}
-        />
+        <ToggleTheme />
       </div>
       <header className={styles.header}>
         <h1 className={styles.title}>
