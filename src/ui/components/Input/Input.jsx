@@ -7,10 +7,12 @@ const Input = ({
   label,
   register,
   name,
-  required,
   placeholder,
   autoComplete,
+  errors,
 }) => {
+  const isError = errors && errors[name];
+
   return (
     <label title={label} className={styles.inputGroup}>
       {label}
@@ -18,9 +20,9 @@ const Input = ({
         id={name}
         type={type}
         placeholder={placeholder}
-        required={required}
         autoComplete={autoComplete}
         {...register(name, { required: true })}
+        data-error={isError?.type === "required"}
       />
     </label>
   );
