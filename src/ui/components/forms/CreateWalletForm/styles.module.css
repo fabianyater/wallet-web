@@ -1,0 +1,27 @@
+.formGrid {
+  box-sizing: border-box;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  transition: all ease-in-out 0.3s;
+
+  .buttons {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+  }
+}
+
+.formGrid > *:last-child {
+  grid-column: 1 / -1;
+}
+
+@media screen and (max-width: 720px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+    transition: all ease-in-out 0.3s;
+  }
+}
