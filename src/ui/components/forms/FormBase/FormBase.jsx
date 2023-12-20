@@ -3,7 +3,7 @@ import styles from "./styles.module.css";
 
 const FormBase = ({ showFooter, footerText, link, handleSumbit, children }) => {
   return (
-    <form className={styles.formBase} onSubmit={handleSumbit}>
+    <form className={`${styles.formBase}`} onSubmit={handleSumbit}>
       {children}
       {showFooter ? (
         <p className={styles.footerText}>
