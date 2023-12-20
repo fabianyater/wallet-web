@@ -4,14 +4,17 @@ import ReactDOM from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import App from './App';
+import { AuthProvider } from './context/AuthProvider';
 import { ThemeProvider } from './context/ThemeProvider';
 import './index.css';
-import LoginPage from './ui/pages/public/LoginPage';
-import SignUpPage from './ui/pages/public/SignUpPage/SignUpPage';
-import PrivateRoute from './ui/pages/components/PrivateRoute/PrivateRoute';
-import TestPage from './ui/pages/private/test';
-import { AuthProvider } from './context/AuthProvider';
+import PrivateRoute from './ui/pages/components/PrivateRoute';
 import CreateFirstAccountPage from './ui/pages/private/CreateFirstAccountPage';
+import WalletsPage from './ui/pages/private/WalletsPage/';
+import CreateNewWallet from './ui/pages/private/WalletsPage/CreateNewWallet';
+import ListWallets from './ui/pages/private/WalletsPage/ListWallets/';
+import TestPage from './ui/pages/private/test';
+import LoginPage from './ui/pages/public/LoginPage';
+import SignUpPage from './ui/pages/public/SignUpPage';
 
 
 const queryClient = new QueryClient();
@@ -34,6 +37,10 @@ root.render(
                 <Route path="/create-first-account" element={<PrivateRoute>
                   <CreateFirstAccountPage />
                 </PrivateRoute>} />
+                <Route path='wallets' element={<PrivateRoute><WalletsPage /></PrivateRoute>}>
+                  <Route index element={<PrivateRoute><ListWallets /></PrivateRoute>} />
+                  <Route index path='create' element={<PrivateRoute><CreateNewWallet /></PrivateRoute>} />
+                </Route>
                 <Route path="*" element={<h1>404</h1>} />
               </Route>
             </Routes>
