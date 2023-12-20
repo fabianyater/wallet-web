@@ -3,17 +3,23 @@ import { formatCurrency } from "../../../../../utilities/generalUtils";
 export const columns = [
   {
     title: "Nombre",
-    width: 200,
     dataIndex: "name",
     sorter: (a, b) => {
       const nameA = a.name ? a.name : "";
       const nameB = b.name ? b.name : "";
       return nameA.localeCompare(nameB);
     },
+    render: (name, record) => {
+      const style = {
+        color: record.color,
+        fontWeight: '600'
+      }
+
+      return <span style={style}>{name}</span>
+    }
   },
   {
     title: "Tipo",
-    width: 150,
     dataIndex: "type",
     sorter: (a, b) => {
       const nameA = a.type ? a.type : "";
@@ -22,15 +28,21 @@ export const columns = [
     },
     render: (type, record) => {
       const style = {
-        color: record.type === "expense" ? "#17EB53" : "#FF3B3B",
-      };
+        color: record.type === "general" ? '#5fff98' : 'yellow',
+        padding: '2px 10px',
+        border: `1px solid ${record.type === "general" ? '#489966' : 'yellow'}`,
+        fontSize: '.75rem',
+        lineHeight: '1rem',
+        borderRadius: '5px',
+        fontWeight: '500',
+        background: '#3d433f'
+      }
 
-      return <span style={style}>{type}</span>;
-    },
+      return <span style={style}>{type}</span>
+    }
   },
   {
     title: "Balance",
-    width: 150,
     dataIndex: "balance",
     sorter: (a, b) => a.balance - b.balance,
     render: (balance) => {
@@ -39,15 +51,45 @@ export const columns = [
   },
   {
     title: "Moneda",
-    width: 150,
     dataIndex: "currency",
     sorter: (a, b) => a.currency - b.currency,
+    render: (currency) => {
+      return <span>{currency.toUpperCase()}</span>
+    }
   },
   {
+    title: "Limitada",
+    dataIndex: "isLimited",
+    sorter: (a, b) => a.currency - b.currency,
+    render: (value, record, index) => {
+      return (
+        <span style={{ margin: 0 }}>
+          {value ? "Sí" : "No"}
+        </span>
+      );
+    },
+  },
+  {
+    title: "Excluída",
+    dataIndex: "isExcluded",
+    sorter: (a, b) => a.currency - b.currency,
+    render: (value, record, index) => {
+      return (
+        <span style={{ margin: 0 }}>
+          {value ? "Sí" : "No"}
+        </span>
+      );
+    },
+  },
+
+  /* {
     title: "Accciones",
     dataIndex: "actions",
-    width: 20
-  },
+  
+    render: (text, record) => (
+      <button onClick={() => }>Editar</button>
+    ),
+  }, */
   {
     dataIndex: "type",
     onFilter: (value, record) => record.type.indexOf(value) === 0,
@@ -55,7 +97,6 @@ export const columns = [
       { text: 'General', value: 'general' },
       { text: 'Tarjeta de crédito', value: 'creditCard' },
     ],
-    width: 0,
     render: () => null,
   },
 ];
