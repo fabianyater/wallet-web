@@ -1,4 +1,4 @@
-.inputGroup {
+.selectGroup {
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
@@ -7,9 +7,8 @@
   font-weight: 300;
   font-size: 12px;
   color: var(--secondary-text-color);
-  position: relative;
 
-  & input {
+  & select {
     box-sizing: border-box;
     height: 48px;
     border-radius: 10px;
@@ -18,21 +17,21 @@
     background-color: #262626;
     color: var(--secondary-text-color);
     padding-left: 16px;
-    position: relative;
-    border: 1px solid transparent;
     transition: border ease-in-out 0.3s;
+
 
     &:focus {
       border: 1px solid var(--secondary-text-color);
     }
   }
 
-  & input[data-error="true"] {
+  & select[data-error="true"] {
     border-width: 1px 1px 1px 10px;
     border-style: solid;
     border-color: rgb(191, 22, 80) rgb(191, 22, 80) rgb(191, 22, 80)
       rgb(236, 89, 144);
     border-image: initial;
     background: rgb(251, 236, 242);
+    color: #000;
   }
 }

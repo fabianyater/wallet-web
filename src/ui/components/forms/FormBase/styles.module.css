@@ -4,8 +4,9 @@
   flex-direction: column;
   justify-content: space-between;
   border-radius: 20px;
-  max-width: 400px;
+  max-width: 600px;
   width: 100%;
+  margin: 0 auto;
 
   .footerText {
     font-weight: 300;
@@ -16,4 +17,8 @@
       color: #0bd08a;
     }
   }
+}
+
+.grid {
+  background-color: red;
 }

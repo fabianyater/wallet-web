@@ -7,7 +7,7 @@ export const privateRoutes = [
   },
   {
     label: "Billeteras",
-    route: '/wallets/list',
+    route: '/wallets',
     icon: "wallet02"
   },
   {

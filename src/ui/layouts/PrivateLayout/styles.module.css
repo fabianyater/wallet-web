@@ -10,7 +10,7 @@
 
   .content {
     grid-area: main;
-    padding: 20px;
+    padding: 20px 40px;
   }
 }
 
@@ -23,5 +23,9 @@
       "main main"
       "main main"
       "main main";
+
+      .content {
+        padding: 20px;
+      }
   }
 }

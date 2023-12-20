@@ -5,7 +5,8 @@ import { getAccounts } from '../services/endpoints/accounts';
 export const AccountsContext = createContext();
 
 export const AccountsProvider = ({ children, auth }) => {
-  const [selectedAccount, setSelectedAccount] = useState()
+  const initialSelectedAccount = localStorage.getItem('accountId');
+  const [selectedAccount, setSelectedAccount] = useState(initialSelectedAccount)
   const { data, isPending, isError } = useQuery({
     queryKey: ["accounts"],
     queryFn: () => getAccounts(auth.userId, auth.token),
@@ -15,9 +16,18 @@ export const AccountsProvider = ({ children, auth }) => {
 
   useEffect(() => {
     if (!selectedAccount && accounts.length > 0) {
-      setSelectedAccount(accounts[0].accountId);
+      const defaultAccount = accounts[0].accountId;
+      setSelectedAccount(defaultAccount);
     }
   }, [accounts, selectedAccount]);
+
+  useEffect(() => {
+    if (selectedAccount) {
+      const storedAuth = JSON.parse(localStorage.getItem('auth')) || {}
+      storedAuth.accountId = selectedAccount
+      localStorage.setItem('auth', JSON.stringify(storedAuth));
+    }
+  }, [selectedAccount]);
 
   const hasAccounts = () => {
     return accounts.length > 0;
