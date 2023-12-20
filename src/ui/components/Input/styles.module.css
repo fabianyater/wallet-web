@@ -35,4 +35,8 @@
     border-image: initial;
     background: rgb(251, 236, 242);
   }
+
+  & input[data-width="true"] {
+    width: 100%;
+  }
 }

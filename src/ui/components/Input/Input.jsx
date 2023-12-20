@@ -10,6 +10,7 @@ const Input = ({
   placeholder,
   autoComplete,
   errors,
+  fullWidth
 }) => {
   const isError = errors && errors[name];
 
@@ -23,6 +24,7 @@ const Input = ({
         autoComplete={autoComplete}
         {...register(name, { required: true })}
         data-error={isError?.type === "required"}
+        data-width={fullWidth}
       />
     </label>
   );
