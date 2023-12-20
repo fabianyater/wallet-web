@@ -1,0 +1,53 @@
+.labelToggle {
+  font-size: 12px;
+
+  .toggle {
+    box-sizing: border-box;
+    appearance: none;
+    position: relative;
+    display: inline-block;
+    background: lightgrey;
+    height: 1.25rem;
+    width: 2.25rem;
+    vertical-align: middle;
+    border-radius: 2rem;
+    box-shadow: 0px 1px 3px #0003 inset;
+    transition: 0.25s linear background;
+
+    &::before {
+      content: "";
+      display: block;
+      width: 1.25rem;
+      height: 1.25rem;
+      background: #fff;
+      border-radius: 1.2rem;
+      position: absolute;
+      top: 0rem;
+      left: 0rem;
+      box-shadow: 0px 1px 3px #0003;
+      transition: 0.25s linear transform;
+      transform: translateX(0rem);
+    }
+
+    &:checked {
+      background: #0bd08a;
+    }
+
+    &:checked::before {
+      transform: translateX(1rem);
+    }
+
+    &:focus-visible {
+      outline: 2px solid dodgerblue;
+      outline-offset: 2px;
+    }
+  }
+}
+
+.span {
+  display: block;
+  font-size: 12px;
+  font-weight: 300;
+  color: #ccc;
+  margin-top: 5px;
+}
