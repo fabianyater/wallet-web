@@ -27,6 +27,13 @@
   }
 }
 
+.button[data-cancel="true"] {
+  background: rgb(139, 10, 10);
+  & span {
+    color: #f1ebeb;
+  }
+}
+
 .button[data-only-icon="true"] {
   padding: 10px;
   border-radius: 50%;

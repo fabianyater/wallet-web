@@ -14,6 +14,7 @@ const Button = ({
   onClick,
   isLoading,
   onlyIcon,
+  cancel,
   title,
 }) => {
   const { theme } = useContext(ThemeContext);
@@ -26,6 +27,7 @@ const Button = ({
       data-only-icon={onlyIcon}
       data-theme={theme}
       title={title}
+      data-cancel={cancel}
     >
       {isLoading ? (
         <Spinner />
