@@ -23,6 +23,8 @@ const ListWallets = () => {
       size={"large"}
       data={wallets}
       columns={columns}
+      path={"wallets/edit"}
+      footer={<h1 style={{color: '#fff', margin: 0}}>Mostrando {wallets.length} resultados</h1>}
     />
   );
 };
