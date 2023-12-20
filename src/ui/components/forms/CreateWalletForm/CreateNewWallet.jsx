@@ -18,7 +18,6 @@ const CreateNewWallet = () => {
   const { selectedAccount } = useContext(AccountsContext);
   const [isToggleChecked, setIsToggleChecked] = useState(false);
   const navigate = useNavigate();
-
   const {
     register,
     handleSubmit,
@@ -110,6 +109,15 @@ const CreateNewWallet = () => {
             name={"currency"}
             errors={errors}
             required
+          />
+          <Input
+            type={"color"}
+            register={register}
+            name={"color"}
+            label={"Seleccionar color"}
+            errors={errors}
+            required
+            fullWidth
           />
           <div>
             <Toggle
