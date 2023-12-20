@@ -15,6 +15,7 @@ import ListWallets from './ui/pages/private/WalletsPage/ListWallets/';
 import TestPage from './ui/pages/private/test';
 import LoginPage from './ui/pages/public/LoginPage';
 import SignUpPage from './ui/pages/public/SignUpPage';
+import EditWallet from './ui/pages/private/WalletsPage/EditWallet';
 
 
 const queryClient = new QueryClient();
@@ -40,6 +41,7 @@ root.render(
                 <Route path='wallets' element={<PrivateRoute><WalletsPage /></PrivateRoute>}>
                   <Route index element={<PrivateRoute><ListWallets /></PrivateRoute>} />
                   <Route index path='create' element={<PrivateRoute><CreateNewWallet /></PrivateRoute>} />
+                  <Route index path='edit/:id' element={<PrivateRoute><EditWallet /></PrivateRoute>} />
                 </Route>
                 <Route path="*" element={<h1>404</h1>} />
               </Route>
