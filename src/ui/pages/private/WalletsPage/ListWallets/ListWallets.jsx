@@ -10,7 +10,7 @@ const ListWallets = () => {
   const { auth } = useContext(AuthContext);
   const { selectedAccount } = useContext(AccountsContext);
   const { data, isPending, isError } = useQuery({
-    queryKey: ["wallets"],
+    queryKey: ["wallets", selectedAccount],
     queryFn: () => getWallets(selectedAccount, auth.token),
   });
 
@@ -24,7 +24,11 @@ const ListWallets = () => {
       data={wallets}
       columns={columns}
       path={"wallets/edit"}
-      footer={<h1 style={{color: '#fff', margin: 0}}>Mostrando {wallets.length} resultados</h1>}
+      footer={
+        <h1 style={{ color: "#fff", margin: 0 }}>
+          Mostrando {wallets.length} resultados
+        </h1>
+      }
     />
   );
 };
