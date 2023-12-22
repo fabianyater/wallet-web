@@ -21,7 +21,7 @@ const Header = () => {
           type={"button"}
         />
       </div>
-      <h2 className={styles.greet}>Bienvenida/o, <span>{username}</span></h2>
+      <h2 className={styles.greet}>Hola, <span>{username}</span></h2>
       <div className={styles.headerOptions}>
         <ToggleTheme />
       </div>
