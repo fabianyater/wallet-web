@@ -1,16 +1,25 @@
-import { useQuery } from '@tanstack/react-query';
-import React, { createContext, useEffect, useMemo, useState } from 'react';
-import { getAccounts } from '../services/endpoints/accounts';
+import {useQuery, useQueryClient} from '@tanstack/react-query';
+import React, {createContext, useEffect, useMemo, useState} from 'react';
+import {getAccounts} from '../services/endpoints/accounts';
 
 export const AccountsContext = createContext();
 
-export const AccountsProvider = ({ children, auth }) => {
-  const initialSelectedAccount = localStorage.getItem('accountId');
+export const AccountsProvider = ({children, auth}) => {
+  const getAccountIdFromLocalStorage = () => {
+    return JSON.parse(localStorage.getItem('auth')) || {};
+  }
+
+  const queryClient = useQueryClient();
+  const initialSelectedAccount = getAccountIdFromLocalStorage().accountId;
   const [selectedAccount, setSelectedAccount] = useState(initialSelectedAccount)
-  const { data, isPending, isError } = useQuery({
+  const {data, isPending, isError} = useQuery({
     queryKey: ["accounts"],
     queryFn: () => getAccounts(auth.userId, auth.token),
   });
+
+  const refetchAccounts = () => {
+    queryClient.invalidateQueries(["accounts"]);
+  };
 
   const accounts = useMemo(() => data?.data || [], [data]);
 
@@ -23,11 +32,13 @@ export const AccountsProvider = ({ children, auth }) => {
 
   useEffect(() => {
     if (selectedAccount) {
-      const storedAuth = JSON.parse(localStorage.getItem('auth')) || {}
+      const storedAuth = getAccountIdFromLocalStorage();
       storedAuth.accountId = selectedAccount
+
       localStorage.setItem('auth', JSON.stringify(storedAuth));
     }
   }, [selectedAccount]);
+
 
   const hasAccounts = () => {
     return accounts.length > 0;
@@ -39,7 +50,8 @@ export const AccountsProvider = ({ children, auth }) => {
     updateSelectedAccount: setSelectedAccount,
     isPending,
     isError,
-    hasAccounts
+    hasAccounts,
+    refetchAccounts
   }
 
   return (

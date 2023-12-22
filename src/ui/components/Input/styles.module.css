@@ -39,4 +39,8 @@
   & input[data-width="true"] {
     width: 100%;
   }
+
+  & input[type="color"] {
+    padding: 3px;
+  }
 }

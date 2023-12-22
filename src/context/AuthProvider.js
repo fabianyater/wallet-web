@@ -5,6 +5,11 @@ export const AuthContext = createContext();
 export function AuthProvider({ children }) {
   const [auth, setAuth] = useState({});
 
+  const logout = useCallback(() => {
+    setAuth({});
+    localStorage.removeItem("auth");
+  }, []);
+
   useEffect(() => {
     const storedAuth = JSON.parse(localStorage.getItem("auth"));
     if (storedAuth) {
@@ -12,10 +17,20 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
-  const logout = useCallback(() => {
-    setAuth({});
-    localStorage.removeItem("auth");
-  }, []);
+  useEffect(() => {
+    const checkTokenExpiration = () => {
+      if (auth && auth.expirationDate) {
+        const now = new Date().getTime();
+
+        if (auth.expirationDate <= now) {
+          logout();
+        }
+      }
+    };
+
+    const interval = setInterval(checkTokenExpiration, 1000);
+    return () => clearInterval(interval);
+  }, [auth]);
 
   const value = { auth, setAuth, logout };
 
