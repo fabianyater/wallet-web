@@ -4,12 +4,13 @@
   align-items: center;
   gap: 8px;
   padding: 10px 0;
-  font-size: 16px;
+  font-size: .875rem;
 }
 
 .breadcrumb a {
   color: #fff;
   text-decoration: none;
+  text-transform: capitalize;
 }
 
 .breadcrumb a:hover {
@@ -18,4 +19,5 @@
 
 .breadcrumb span {
   color: #0BD08A;
+  text-transform: capitalize;
 }
