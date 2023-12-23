@@ -15,6 +15,7 @@ export const AccountsProvider = ({children, auth}) => {
   const {data, isPending, isError} = useQuery({
     queryKey: ["accounts"],
     queryFn: () => getAccounts(auth.userId, auth.token),
+    refetchOnWindowFocus: false,
   });
 
   const refetchAccounts = () => {
