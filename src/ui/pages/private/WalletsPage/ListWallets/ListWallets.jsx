@@ -12,6 +12,7 @@ const ListWallets = () => {
   const { data, isPending, isError } = useQuery({
     queryKey: ["wallets", selectedAccount],
     queryFn: () => getWallets(selectedAccount, auth.token),
+    refetchOnWindowFocus: false
   });
 
   const wallets = data?.data || [];
