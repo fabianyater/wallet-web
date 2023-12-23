@@ -1,0 +1,51 @@
+.wrapper {
+  padding: 0.25rem;
+  position: relative;
+
+  &:first-child {
+    border-bottom: 1px solid rgb(82, 82, 82);
+  }
+
+  &:last-child {
+    border-top: 1px solid rgb(82, 82, 82);
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    border-radius: 4px;
+    padding: 0.7rem;
+    cursor: pointer;
+
+    & div {
+      width: 20px;
+      height: 20px;
+      padding: 0;
+    }
+
+    & svg {
+      width: 20px;
+      height: 20px;
+      color: rgba(113, 113, 122, 1);
+    }
+
+    & span {
+      font-size: 14px;
+      color: rgba(228, 228, 231, 1);
+    }
+
+    &:hover {
+      background-color: #262626;
+    }
+  }
+}
+
+.borderBottom {
+  border-bottom: 1px solid #fff;
+}
+
+.borderTop {
+  border-top: 1px solid #ccc;
+}

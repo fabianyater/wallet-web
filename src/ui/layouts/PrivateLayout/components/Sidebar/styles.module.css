@@ -1,0 +1,83 @@
+.sidebar {
+  width: 280px;
+  height: 100%;
+  background-color: #1c1c1c;
+  box-sizing: border-box;
+  padding: 0 20px;
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  transition: width 0.3s ease-in;
+  grid-area: sidebar;
+  transition: all 0.3s ease-in-out;
+}
+
+.sidebar[data-toggle-sidebar="true"] {
+  display: flex;
+  z-index: 100;
+  transform: translateX(0);
+  transition: all 0.3s ease-in-out;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 65px;
+
+  & h1 {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.navbar {
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  margin-bottom: 10px;
+
+  .list {
+    box-sizing: border-box;
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 5px;
+  }
+}
+
+/* TODO: dejar solos los iconos */
+/* @media screen and (max-width: 1200px) {
+  .sidebar {
+    width: 80px;
+
+    & .logo {
+      justify-content: center;
+      & h1 {
+        font-size: 0;
+        visibility: visible;
+      }
+      & h1::first-letter {
+        font-size: 1.5rem;
+        visibility: visible;
+      }
+    }
+  }
+} */
+
+@media screen and (max-width: 1200px) {
+  .sidebar {
+    display: none;
+    transform: translateX(-100%);
+    transition: all 0.3s ease-in-out;
+  }
+}

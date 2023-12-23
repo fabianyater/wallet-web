@@ -1,0 +1,31 @@
+.privateLayout {
+  display: grid;
+  grid-template-columns: 280px 2fr;
+  grid-template-rows: auto 1fr 1fr 1fr;
+  grid-template-areas:
+    "sidebar header"
+    "sidebar main"
+    "sidebar main"
+    "sidebar main";
+
+  .content {
+    grid-area: main;
+    padding: 20px 40px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .privateLayout {
+    grid-template-columns: 2fr;
+    grid-template-rows: auto 1fr 1fr 1fr;
+    grid-template-areas:
+      "header header"
+      "main main"
+      "main main"
+      "main main";
+
+      .content {
+        padding: 20px;
+      }
+  }
+}
