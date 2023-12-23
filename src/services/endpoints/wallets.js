@@ -1,5 +1,5 @@
-import axios from "axios";
 import routes from "../config";
+import {api} from "../config/axiosConfig";
 
 const getHeaderOptions = (token) => ({
   headers: {
@@ -9,12 +9,12 @@ const getHeaderOptions = (token) => ({
 });
 
 const getWallets = async (accountId, token) => {
-  return await axios.get(routes.WALLETS.BY_ACCOUNT(accountId), getHeaderOptions(token))
+  return await api.get(routes.WALLETS.BY_ACCOUNT(accountId), getHeaderOptions(token))
 }
 
 const addNewWallet = async (data, token) => {
-  return await axios.post(`${routes.API_ROUTES.WALLETS}/`, data, getHeaderOptions(token))
+  return await api.post(`${routes.API_ROUTES.WALLETS}/`, data, getHeaderOptions(token))
 }
 
 
-export { addNewWallet, getWallets };
+export {addNewWallet, getWallets};
