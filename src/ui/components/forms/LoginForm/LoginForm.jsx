@@ -20,6 +20,7 @@ const LoginForm = () => {
       const newAuth = {
         ...auth,
         token: response.data.jwt,
+        refreshToken: response.data.refreshToken,
         expirationDate: response.data.expirationDate,
         userId: response.data.userId,
         username: response.data.userName,
