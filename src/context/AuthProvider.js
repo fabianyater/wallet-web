@@ -17,7 +17,7 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
-  useEffect(() => {
+ /* useEffect(() => {
     const checkTokenExpiration = () => {
       if (auth && auth.expirationDate) {
         const now = new Date().getTime();
@@ -30,7 +30,7 @@ export function AuthProvider({ children }) {
 
     const interval = setInterval(checkTokenExpiration, 1000);
     return () => clearInterval(interval);
-  }, [auth]);
+  }, [auth]);*/
 
   const value = { auth, setAuth, logout };
 
