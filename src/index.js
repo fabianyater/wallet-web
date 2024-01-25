@@ -8,7 +8,6 @@ import { AuthProvider } from './context/AuthProvider';
 import { ThemeProvider } from './context/ThemeProvider';
 import './index.css';
 import PrivateRoute from './ui/pages/components/PrivateRoute';
-import AccountsPage from './ui/pages/private/AccountsPage';
 import CreateNewAccount from './ui/pages/private/AccountsPage/CreateNewAccount';
 import ListAccounts from './ui/pages/private/AccountsPage/ListAccounts';
 import CreateFirstAccountPage from './ui/pages/private/CreateFirstAccountPage';
@@ -19,10 +18,9 @@ import ListWallets from './ui/pages/private/WalletsPage/ListWallets/';
 import TestPage from './ui/pages/private/test';
 import LoginPage from './ui/pages/public/LoginPage';
 import SignUpPage from './ui/pages/public/SignUpPage';
-
+import AccountsPage from './ui/pages/private/AccountsPage/AccountsPage';
 
 const queryClient = new QueryClient();
-
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -43,12 +41,13 @@ root.render(
                 </PrivateRoute>} />
                 <Route path='wallets' element={<PrivateRoute><WalletsPage /></PrivateRoute>}>
                   <Route index element={<PrivateRoute><ListWallets /></PrivateRoute>} />
-                  <Route index path='create' element={<PrivateRoute><CreateNewWallet /></PrivateRoute>} />
-                  <Route index path='edit/:id' element={<PrivateRoute><EditWallet /></PrivateRoute>} />
+                  <Route path='create' element={<PrivateRoute><CreateNewWallet /></PrivateRoute>} />
+                  <Route path='edit/:id' element={<PrivateRoute><EditWallet /></PrivateRoute>} />
                 </Route>
                 <Route path='accounts' element={<PrivateRoute><AccountsPage /></PrivateRoute>}>
                   <Route index element={<PrivateRoute><ListAccounts /></PrivateRoute>} />
-                  <Route index path='create' element={<PrivateRoute><CreateNewAccount /></PrivateRoute>} />
+                  <Route path='create' element={<PrivateRoute><CreateNewAccount /></PrivateRoute>} />
+                  <Route path='edit/:id' element={<PrivateRoute><h2>Coming soon...</h2></PrivateRoute>} />
                 </Route>
                 <Route path="*" element={<h1>404</h1>} />
               </Route>
