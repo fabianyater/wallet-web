@@ -4,7 +4,7 @@ import { AccountsContext } from "../../../../../context/AccountsProvider";
 import AuthContext from "../../../../../context/AuthProvider";
 import { getWallets } from "../../../../../services/endpoints/wallets";
 import CustomTable from "../../../../components/CustomTable/CustomTable";
-import { columns } from "./utils";
+import { columns } from "./tableColumns";
 
 const ListWallets = () => {
   const { auth } = useContext(AuthContext);

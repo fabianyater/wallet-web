@@ -24,3 +24,9 @@ export const getRefreshTokenFromLocalStorage = () => {
   const storedAuth = getAuthFromToken();
   return storedAuth.refreshToken;
 }
+
+export const sortNames = (a, b) => {
+  const nameA = a.name ? a.name : "";
+  const nameB = b.name ? b.name : "";
+  return nameA.localeCompare(nameB);
+}

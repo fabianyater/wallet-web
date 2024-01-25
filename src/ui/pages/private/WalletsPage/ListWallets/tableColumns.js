@@ -1,14 +1,10 @@
-import { formatCurrency } from "../../../../../utilities/generalUtils";
+import { formatCurrency, sortNames } from "../../../../../utilities/generalUtils";
 
 export const columns = [
   {
     title: "Nombre",
     dataIndex: "name",
-    sorter: (a, b) => {
-      const nameA = a.name ? a.name : "";
-      const nameB = b.name ? b.name : "";
-      return nameA.localeCompare(nameB);
-    },
+    sorter: (a, b) => sortNames(a, b),
     render: (name, record) => {
       const style = {
         color: record.color,
