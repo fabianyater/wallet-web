@@ -30,3 +30,30 @@ export const sortNames = (a, b) => {
   const nameB = b.name ? b.name : "";
   return nameA.localeCompare(nameB);
 }
+
+
+export const walletTypesList = [
+  {
+    id: 1,
+    value: "general",
+    name: "General",
+  },
+  {
+    id: 2,
+    value: "creditCard",
+    name: "Tarjeta de crédito",
+  },
+];
+
+export const currenciesList = [
+  {
+    id: 1,
+    value: "cop",
+    name: "COP",
+  },
+  {
+    id: 2,
+    value: "eur",
+    name: "EUR",
+  },
+];

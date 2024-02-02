@@ -42,8 +42,9 @@ const TRANSACTIONS = {
 
 const WALLETS = {
   BY_ACCOUNT: (accountId) => `${API_ROUTES.WALLETS}/account/${accountId}`,
+  UPDATE_BY_WALLET_ID: (walletId) => `${API_ROUTES.WALLETS}/update/${walletId}`
 }
 
-const exportedObject = {USER, CATEGORIES, ACCOUNTS, TRANSACTIONS, API_ROUTES, WALLETS}
+const exportedObject = { USER, CATEGORIES, ACCOUNTS, TRANSACTIONS, API_ROUTES, WALLETS }
 
 export default exportedObject;

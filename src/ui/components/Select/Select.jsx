@@ -1,6 +1,6 @@
 import styles from "./styles.module.css";
 
-const Select = ({ label, register, name, errors, placeholder, options }) => {
+const Select = ({ label, register, name, errors, placeholder, options, value }) => {
   const isError = errors && errors[name];
 
   return (
@@ -11,10 +11,11 @@ const Select = ({ label, register, name, errors, placeholder, options }) => {
         placeholder={placeholder}
         {...register(name, { required: true })}
         data-error={isError?.type === "required"}
+        defaultValue={value}
       >
         <option value="">Seleccionar {label.split(" ")[1]}</option>
         {options.map((option) => (
-          <option key={option.id} value={option.value}>
+          <option key={option.id} value={option.value} >
             {option.name}
           </option>
         ))}

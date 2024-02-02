@@ -54,18 +54,6 @@ export const columns = [
     }
   },
   {
-    title: "Limitada",
-    dataIndex: "isLimited",
-    sorter: (a, b) => a.currency - b.currency,
-    render: (value, record, index) => {
-      return (
-        <span style={{ margin: 0 }}>
-          {value ? "Sí" : "No"}
-        </span>
-      );
-    },
-  },
-  {
     title: "Excluída",
     dataIndex: "isExcluded",
     sorter: (a, b) => a.currency - b.currency,

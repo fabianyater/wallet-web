@@ -1,11 +1,15 @@
 import { useMutation } from "@tanstack/react-query";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { AccountsContext } from "../../../../context/AccountsProvider";
 import AuthContext from "../../../../context/AuthProvider";
 import { addNewWallet } from "../../../../services/endpoints/wallets";
+import {
+  currenciesList,
+  walletTypesList,
+} from "../../../../utilities/generalUtils";
 import Button from "../../Button";
 import Input from "../../Input";
 import Select from "../../Select/Select";
@@ -16,7 +20,6 @@ import styles from "./styles.module.css";
 const CreateNewWallet = () => {
   const { auth } = useContext(AuthContext);
   const { selectedAccount } = useContext(AccountsContext);
-  const [isToggleChecked, setIsToggleChecked] = useState(false);
   const navigate = useNavigate();
   const {
     register,
@@ -42,32 +45,6 @@ const CreateNewWallet = () => {
   const onSubmit = (data) => {
     mutation.mutate(data);
   };
-
-  const walletsList = [
-    {
-      id: 1,
-      value: "general",
-      name: "General",
-    },
-    {
-      id: 2,
-      value: "creditCard",
-      name: "Tarjeta de crédito",
-    },
-  ];
-
-  const currencyList = [
-    {
-      id: 1,
-      value: "cop",
-      name: "COP",
-    },
-    {
-      id: 2,
-      value: "eur",
-      name: "EUR",
-    },
-  ];
 
   return (
     <>
@@ -96,7 +73,7 @@ const CreateNewWallet = () => {
           />
           <Select
             register={register}
-            options={walletsList}
+            options={walletTypesList}
             label={"Seleccionar tipo"}
             name={"type"}
             errors={errors}
@@ -104,7 +81,7 @@ const CreateNewWallet = () => {
           />
           <Select
             register={register}
-            options={currencyList}
+            options={currenciesList}
             label={"Seleccionar moneda"}
             name={"currency"}
             errors={errors}
@@ -129,27 +106,6 @@ const CreateNewWallet = () => {
               name={"isExcluded"}
             />
           </div>
-          <div>
-            <Toggle
-              label={"Limitar"}
-              text={"¿Quieres establecer un límite para esta billetera?"}
-              register={register}
-              name={"isLimited"}
-              onChange={() => setIsToggleChecked(!isToggleChecked)}
-            />
-          </div>
-          {isToggleChecked && (
-            <Input
-              type={"number"}
-              name={"limitValue"}
-              register={register}
-              autoComplete
-              label={"Valor límite"}
-              placeholder={"$ 100.000,00"}
-              errors={errors}
-              required
-            />
-          )}
           <div className={styles.buttons}>
             <Button
               text={"Crear"}
