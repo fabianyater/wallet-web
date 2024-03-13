@@ -1,4 +1,5 @@
 import { formatCurrency, sortNames } from "../../../../../utilities/generalUtils";
+import SortArrows from "../../../../components/SortArrows/SortArrows";
 
 export const columns = [
   {
@@ -6,6 +7,7 @@ export const columns = [
     rowKey: 1,
     dataIndex: "name",
     sorter: (a, b) => sortNames(a, b),
+    sortIcon: ({ sortOrder }) => <SortArrows sortOrder={sortOrder} />,
     render: (name, record) => {
       const style = {
         color: record.color,
@@ -24,6 +26,7 @@ export const columns = [
       const nameB = b.type ? b.type : "";
       return nameA.localeCompare(nameB);
     },
+    sortIcon: ({ sortOrder }) => <SortArrows sortOrder={sortOrder} />,
     render: (type, record) => {
       const style = {
         color: record.type === "general" ? '#5fff98' : 'yellow',
@@ -45,6 +48,7 @@ export const columns = [
     rowKey: 3,
     dataIndex: "balance",
     sorter: (a, b) => a.balance - b.balance,
+    sortIcon: ({ sortOrder }) => <SortArrows sortOrder={sortOrder} />,
     render: (balance) => {
       return <span>{formatCurrency(balance, 2)}</span>
     }
@@ -54,6 +58,7 @@ export const columns = [
     rowKey: 4,
     dataIndex: "currency",
     sorter: (a, b) => a.currency - b.currency,
+    sortIcon: ({ sortOrder }) => <SortArrows sortOrder={sortOrder} />,
     render: (currency) => {
       return <span>{currency.toUpperCase()}</span>
     }
@@ -63,6 +68,7 @@ export const columns = [
     rowKey: 5,
     dataIndex: "isExcluded",
     sorter: (a, b) => a.currency - b.currency,
+    sortIcon: ({ sortOrder }) => <SortArrows sortOrder={sortOrder} />,
     render: (value) => {
       return (
         <span style={{ margin: 0 }}>

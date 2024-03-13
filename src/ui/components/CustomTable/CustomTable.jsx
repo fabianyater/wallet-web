@@ -19,6 +19,11 @@ const CustomTable = ({
     <Table
       rowKey={rowKey}
       scroll={{ x: "max-content" }}
+      locale={{
+        triggerAsc: "Click para ordernar de manera ascendente",
+        triggerDesc: "Click para ordernar de manera descendente",
+        cancelSort: "Click para cancelar ordenamiento",
+      }}
       loading={isLoading}
       size={size}
       onRow={(record, rowIndex) => {

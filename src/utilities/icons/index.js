@@ -1,4 +1,4 @@
-import { BudgetIcon, CategoriesIcon, ChevronDownIcon, ChevronLeftIcon, ChevronUpIcon, DarkIcon, DebtIcon, EditIcon, GoalIcon, HomeIcon, LightIcon, LogoutIcon, MenuIcon, MovementIcon, PlusIcon, SettingsIcon, SuscriptionIcon, UserIcon, Wallet02Icon, WalletIcon } from "./SvgIcon";
+import { BudgetIcon, CategoriesIcon, ChevronDown, ChevronDownIcon, ChevronLeftIcon, ChevronUp, ChevronUpIcon, DarkIcon, DebtIcon, EditIcon, GoalIcon, HomeIcon, LightIcon, LogoutIcon, MenuIcon, MovementIcon, PlusIcon, SettingsIcon, SuscriptionIcon, UserIcon, Wallet02Icon, WalletIcon } from "./SvgIcon";
 
 const icons = {
   lightTheme: LightIcon,
@@ -20,7 +20,9 @@ const icons = {
   logout: LogoutIcon,
   profile: UserIcon,
   edit: EditIcon,
-  suscription: SuscriptionIcon
+  suscription: SuscriptionIcon,
+  sortUp: ChevronUp,
+  sortDown: ChevronDown
 }
 
 export default icons;
