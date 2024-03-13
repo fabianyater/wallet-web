@@ -6,6 +6,13 @@ import { useNavigate } from "react-router-dom";
 import { AccountsContext } from "../../../../context/AccountsProvider";
 import AuthContext from "../../../../context/AuthProvider";
 import { addNewWallet } from "../../../../services/endpoints/wallets";
+import {
+  currenciesList,
+  duePaymentDays,
+  getDaysOfMonth,
+  statementDays,
+  walletTypesList,
+} from "../../../../utilities/generalUtils";
 import Button from "../../Button";
 import Input from "../../Input";
 import Select from "../../Select/Select";
@@ -16,11 +23,11 @@ import styles from "./styles.module.css";
 const CreateNewWallet = () => {
   const { auth } = useContext(AuthContext);
   const { selectedAccount } = useContext(AccountsContext);
-  const [isToggleChecked, setIsToggleChecked] = useState(false);
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm();
   const mutation = useMutation({
@@ -39,35 +46,15 @@ const CreateNewWallet = () => {
     },
   });
 
+  const actualDate = new Date();
+  const year = actualDate.getFullYear();
+  const month = actualDate.getMonth();
+
+  const watchTypeSelect = watch("type");
+
   const onSubmit = (data) => {
     mutation.mutate(data);
   };
-
-  const walletsList = [
-    {
-      id: 1,
-      value: "general",
-      name: "General",
-    },
-    {
-      id: 2,
-      value: "creditCard",
-      name: "Tarjeta de crédito",
-    },
-  ];
-
-  const currencyList = [
-    {
-      id: 1,
-      value: "cop",
-      name: "COP",
-    },
-    {
-      id: 2,
-      value: "eur",
-      name: "EUR",
-    },
-  ];
 
   return (
     <>
@@ -84,32 +71,65 @@ const CreateNewWallet = () => {
             required
             errors={errors}
           />
-          <Input
-            type={"number"}
-            name={"balance"}
-            register={register}
-            autoComplete
-            label={"Balance inicial"}
-            placeholder={"$ 100.000,00"}
-            errors={errors}
-            required
-          />
           <Select
             register={register}
-            options={walletsList}
+            options={walletTypesList}
             label={"Seleccionar tipo"}
             name={"type"}
             errors={errors}
             required
           />
+          {watchTypeSelect !== "creditCard" ? (
+            <Input
+              type={"number"}
+              name={"balance"}
+              register={register}
+              autoComplete
+              label={"Balance inicial"}
+              placeholder={"$ 100.000,00"}
+              errors={errors}
+              required
+            />
+          ) : null}
+          {watchTypeSelect === "creditCard" ? (
+            <Input
+              type="number"
+              name="creditLimit"
+              register={register}
+              label="Límite de credito"
+              placeholder="$7.000.000,00"
+              errors={errors}
+              required
+            />
+          ) : null}
           <Select
             register={register}
-            options={currencyList}
+            options={currenciesList}
             label={"Seleccionar moneda"}
             name={"currency"}
             errors={errors}
             required
           />
+          {watchTypeSelect === "creditCard" ? (
+            <>
+              <Select
+                register={register}
+                options={statementDays}
+                label="Día de corte"
+                name="statementDay"
+                errors={errors}
+                required
+              />
+              <Select
+                register={register}
+                options={duePaymentDays}
+                label="Día de pago"
+                name="dueDayPayment"
+                errors={errors}
+                required
+              />
+            </>
+          ) : null}
           <Input
             type={"color"}
             register={register}
@@ -119,37 +139,19 @@ const CreateNewWallet = () => {
             required
             fullWidth
           />
-          <div>
-            <Toggle
-              label={"Excluir"}
-              text={
-                "Ignorar el balance de esta billetera en el balance general"
-              }
-              register={register}
-              name={"isExcluded"}
-            />
-          </div>
-          <div>
-            <Toggle
-              label={"Limitar"}
-              text={"¿Quieres establecer un límite para esta billetera?"}
-              register={register}
-              name={"isLimited"}
-              onChange={() => setIsToggleChecked(!isToggleChecked)}
-            />
-          </div>
-          {isToggleChecked && (
-            <Input
-              type={"number"}
-              name={"limitValue"}
-              register={register}
-              autoComplete
-              label={"Valor límite"}
-              placeholder={"$ 100.000,00"}
-              errors={errors}
-              required
-            />
-          )}
+          {watchTypeSelect !== "creditCard" ? (
+            <div>
+              <Toggle
+                label={"Excluir"}
+                text={
+                  "Ignorar el balance de esta billetera en el balance general"
+                }
+                register={register}
+                name={"isExcluded"}
+              />
+            </div>
+          ) : null}
+
           <div className={styles.buttons}>
             <Button
               text={"Crear"}
