@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { useContext, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -7,33 +7,36 @@ import AuthContext from "../../../../context/AuthProvider";
 import { updateWallet } from "../../../../services/endpoints/wallets";
 import {
   currenciesList,
+  duePaymentDays,
+  fields,
+  statementDays,
   walletTypesList,
 } from "../../../../utilities/generalUtils";
 import Button from "../../Button";
-import ControlledInput from "../../ControlledInput/ControlledInput";
+import Input from "../../Input";
 import Select from "../../Select/Select";
+import Spinner from "../../Spinner";
 import Toggle from "../../Toggle";
 import styles from "../CreateWalletForm/styles.module.css";
 import FormBase from "../FormBase";
 
-const EditWalletForm = ({ dataFromParams }) => {
+const EditWalletForm = ({ data, id, isFetching }) => {
+  const navigate = useNavigate();
   const { auth } = useContext(AuthContext);
-  const [name, setName] = useState(dataFromParams.name);
-  const [balance, setBalance] = useState(dataFromParams.balance);
-  const [color, setColor] = useState(dataFromParams.color);
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
+    watch,
   } = useForm();
-  const navigate = useNavigate();
-  const mutation = useMutation({
-    mutationFn: (data) => {
-      return updateWallet(dataFromParams.walletId, data, auth.token);
-    },
+  const watchTypeSelect = watch("type");
+  const creditCardTypeSelected = watchTypeSelect === "creditCard";
+
+  const updateMutation = useMutation({
+    mutationFn: (dataToUpdate) => updateWallet(id, dataToUpdate, auth.token),
     onSuccess: () => {
       toast.success("Billetera actualizada");
-
       setTimeout(() => {
         navigate("/wallets");
       }, 2000);
@@ -43,29 +46,24 @@ const EditWalletForm = ({ dataFromParams }) => {
     },
   });
 
-  const handleChange = (event) => {
-    setName(event.target.value);
+  useEffect(() => {
+    if (data) {
+      fields.forEach((field) => setValue(field, data[field]));
+    }
+  }, [data, setValue]);
+
+  const onSubmit = (dataToUpdate) => {
+    updateMutation.mutate({ ...dataToUpdate, accountId: auth.accountId });
   };
 
-  const handleBalanceChange = (event) => {
-    setBalance(event.target.value);
-  };
-
-  const handleColorChange = (event) => {
-    setColor(event.target.value);
-  };
-
-  const update = (dataToUpdate) => {
-    const newData = { ...dataToUpdate, accountId: auth.accountId };
-    mutation.mutate(newData);
-  };
+  if (isFetching) return <Spinner />;
 
   return (
     <>
       <Toaster position="top-center" />
-      <FormBase handleSumbit={handleSubmit(update)}>
+      <FormBase handleSumbit={handleSubmit(onSubmit)}>
         <div className={styles.formGrid}>
-          <ControlledInput
+          <Input
             type={"text"}
             name={"name"}
             register={register}
@@ -74,20 +72,6 @@ const EditWalletForm = ({ dataFromParams }) => {
             placeholder={"Ahorros"}
             required
             errors={errors}
-            value={name}
-            onChange={handleChange}
-          />
-          <ControlledInput
-            type={"number"}
-            name={"balance"}
-            register={register}
-            autoComplete
-            label={"Balance inicial"}
-            placeholder={"$ 100.000,00"}
-            errors={errors}
-            required
-            value={balance}
-            onChange={handleBalanceChange}
           />
           <Select
             register={register}
@@ -96,8 +80,31 @@ const EditWalletForm = ({ dataFromParams }) => {
             name={"type"}
             errors={errors}
             required
-            value={dataFromParams.type}
           />
+          {!creditCardTypeSelected ? (
+            <Input
+              type={"number"}
+              name={"balance"}
+              register={register}
+              autoComplete
+              label={"Balance inicial"}
+              placeholder={"$ 100.000,00"}
+              errors={errors}
+              required
+            />
+          ) : null}
+          {creditCardTypeSelected ? (
+            <Input
+              type="number"
+              name="creditLimit"
+              register={register}
+              label="Límite de credito"
+              placeholder="$7.000.000,00"
+              errors={errors}
+              required
+            />
+          ) : null}
+
           <Select
             register={register}
             options={currenciesList}
@@ -105,9 +112,28 @@ const EditWalletForm = ({ dataFromParams }) => {
             name={"currency"}
             errors={errors}
             required
-            value={dataFromParams.currency}
           />
-          <ControlledInput
+          {creditCardTypeSelected ? (
+            <>
+              <Select
+                register={register}
+                options={statementDays}
+                label="Día de corte"
+                name="statementDay"
+                errors={errors}
+                required
+              />
+              <Select
+                register={register}
+                options={duePaymentDays}
+                label="Día de pago"
+                name="duePaymentDay"
+                errors={errors}
+                required
+              />
+            </>
+          ) : null}
+          <Input
             type={"color"}
             register={register}
             name={"color"}
@@ -115,24 +141,23 @@ const EditWalletForm = ({ dataFromParams }) => {
             errors={errors}
             required
             fullWidth
-            value={color}
-            onChange={handleColorChange}
           />
-          <div>
-            <Toggle
-              label={"Excluir"}
-              text={
-                "Ignorar el balance de esta billetera en el balance general"
-              }
-              register={register}
-              name={"isExcluded"}
-              defaultValue={dataFromParams.isExcluded}
-            />
-          </div>
+          {!creditCardTypeSelected ? (
+            <div>
+              <Toggle
+                label={"Excluir"}
+                text={
+                  "Ignorar el balance de esta billetera en el balance general"
+                }
+                register={register}
+                name={"isExcluded"}
+              />
+            </div>
+          ) : null}
           <div className={styles.buttons}>
             <Button
               text={"Actualizar"}
-              isLoading={mutation.isPending}
+              isLoading={updateMutation.isPending}
               type={"submit"}
               title={"Actualizar"}
             />

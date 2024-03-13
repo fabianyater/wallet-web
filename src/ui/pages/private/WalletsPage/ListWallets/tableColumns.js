@@ -3,6 +3,7 @@ import { formatCurrency, sortNames } from "../../../../../utilities/generalUtils
 export const columns = [
   {
     title: "Nombre",
+    rowKey: 1,
     dataIndex: "name",
     sorter: (a, b) => sortNames(a, b),
     render: (name, record) => {
@@ -16,6 +17,7 @@ export const columns = [
   },
   {
     title: "Tipo",
+    rowKey: 2,
     dataIndex: "type",
     sorter: (a, b) => {
       const nameA = a.type ? a.type : "";
@@ -31,7 +33,8 @@ export const columns = [
         lineHeight: '1rem',
         borderRadius: '5px',
         fontWeight: '500',
-        background: '#3d433f'
+        background: '#3d433f',
+        textTransform: "capitalize"
       }
 
       return <span style={style}>{type}</span>
@@ -39,6 +42,7 @@ export const columns = [
   },
   {
     title: "Balance",
+    rowKey: 3,
     dataIndex: "balance",
     sorter: (a, b) => a.balance - b.balance,
     render: (balance) => {
@@ -47,6 +51,7 @@ export const columns = [
   },
   {
     title: "Moneda",
+    rowKey: 4,
     dataIndex: "currency",
     sorter: (a, b) => a.currency - b.currency,
     render: (currency) => {
@@ -55,27 +60,35 @@ export const columns = [
   },
   {
     title: "Excluída",
+    rowKey: 5,
     dataIndex: "isExcluded",
     sorter: (a, b) => a.currency - b.currency,
-    render: (value, record, index) => {
+    render: (value) => {
       return (
         <span style={{ margin: 0 }}>
-          {value ? "Sí" : "No"}
+          {value ?
+            <input
+              type="checkbox"
+              title="Sí"
+              checked
+              style={{ accentColor: "#0BD08A" }} unselectable="off"
+              readOnly
+            />
+            :
+            <input
+              title="No"
+              type="checkbox"
+              unselectable="off"
+              checked={false}
+              readOnly
+            />}
         </span>
       );
     },
   },
-
-  /* {
-    title: "Accciones",
-    dataIndex: "actions",
-  
-    render: (text, record) => (
-      <button onClick={() => }>Editar</button>
-    ),
-  }, */
   {
     dataIndex: "type",
+    rowKey: 6,
     onFilter: (value, record) => record.type.indexOf(value) === 0,
     filters: [
       { text: 'General', value: 'general' },

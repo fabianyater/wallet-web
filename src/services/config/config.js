@@ -41,8 +41,9 @@ const TRANSACTIONS = {
 }
 
 const WALLETS = {
-  BY_ACCOUNT: (accountId) => `${API_ROUTES.WALLETS}/account/${accountId}`,
-  UPDATE_BY_WALLET_ID: (walletId) => `${API_ROUTES.WALLETS}/update/${walletId}`
+  BY_ACCOUNT: (accountId, page, items) => `${API_ROUTES.WALLETS}/account/${accountId}?page=${page}&items=${items}`,
+  UPDATE_BY_WALLET_ID: (walletId) => `${API_ROUTES.WALLETS}/update/${walletId}`,
+  BY_WALLET_ID: (walletId) => `${API_ROUTES.WALLETS}/${walletId}`
 }
 
 const exportedObject = { USER, CATEGORIES, ACCOUNTS, TRANSACTIONS, API_ROUTES, WALLETS }

@@ -9,6 +9,9 @@ const CustomTable = ({
   data,
   columns,
   path,
+  total,
+  page,
+  onChange,
 }) => {
   const navigate = useNavigate();
 
@@ -29,6 +32,12 @@ const CustomTable = ({
       columns={columns}
       pagination={{
         position: ["bottomCenter"],
+        total: total,
+        showTotal: (total, range) =>
+          `Mostrando ${range[0]}-${range[1]} de ${total} resultados`,
+        defaultCurrent: 1,
+        current: page,
+        onChange: onChange,
       }}
       footer={() => footer}
     ></Table>

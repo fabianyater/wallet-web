@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./styles.module.css";
 
-const Toggle = ({ label, text, register, name, defaultValue }) => {
+const Toggle = ({ label, text, register, name, defaultValue, value }) => {
   const [isChecked, setIsChecked] = useState(defaultValue);
 
   const handleToggleChange = (e) => {
@@ -14,6 +14,7 @@ const Toggle = ({ label, text, register, name, defaultValue }) => {
         <input
           type="checkbox"
           {...register(name)}
+          value={value}
           onChange={handleToggleChange}
           className={styles.toggle}
           defaultValue={defaultValue}

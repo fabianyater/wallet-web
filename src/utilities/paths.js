@@ -32,8 +32,13 @@ export const privateRoutes = [
   },
   {
     label: "Movimientos",
-    route: "/movements/list",
+    route: "/movements",
     icon: "movement"
+  },
+  {
+    label: "Suscripciones",
+    route: "/suscriptions",
+    icon: "suscription",
   },
   {
     label: "Cuentas",
