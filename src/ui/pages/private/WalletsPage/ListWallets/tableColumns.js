@@ -40,7 +40,7 @@ export const columns = [
         textTransform: "capitalize"
       }
 
-      return <span style={style}>{type}</span>
+      return <span style={style}>{record.type === "creditCard" ? "Tarjeta de crédito" : "General"}</span>
     }
   },
   {
