@@ -15,12 +15,11 @@ import {
 import Button from "../../Button";
 import Input from "../../Input";
 import Select from "../../Select/Select";
-import Spinner from "../../Spinner";
 import Toggle from "../../Toggle";
 import styles from "../CreateWalletForm/styles.module.css";
 import FormBase from "../FormBase";
 
-const EditWalletForm = ({ data, id, isFetching }) => {
+const EditWalletForm = ({ data, id }) => {
   const navigate = useNavigate();
   const { auth } = useContext(AuthContext);
   const {
@@ -55,8 +54,6 @@ const EditWalletForm = ({ data, id, isFetching }) => {
   const onSubmit = (dataToUpdate) => {
     updateMutation.mutate({ ...dataToUpdate, accountId: auth.accountId });
   };
-
-  if (isFetching) return <Spinner />;
 
   return (
     <>

@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import AuthContext from "../../../../../context/AuthProvider";
 import { getWalletDetails } from "../../../../../services/endpoints/wallets";
+import Spinner from "../../../../components/Spinner";
 import EditWalletForm from "../../../../components/forms/EditWalletForm/EditWalletForm";
 import CreditCardDetails from "../../../components/CreditCardDetails/CreditCardDetails";
 const EditWallet = () => {
@@ -16,6 +17,8 @@ const EditWallet = () => {
 
   const walletData = data?.data;
 
+  if (isFetching) return <Spinner />;
+
   return (
     <>
       {walletData?.type === "creditCard" ? (
@@ -25,7 +28,7 @@ const EditWallet = () => {
           name={walletData.name}
         />
       ) : null}
-      <EditWalletForm id={id} data={walletData} isFetching={isFetching} />
+      <EditWalletForm id={id} data={walletData} />
     </>
   );
 };

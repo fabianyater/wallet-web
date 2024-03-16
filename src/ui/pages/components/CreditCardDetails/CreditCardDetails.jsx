@@ -12,24 +12,24 @@ const CreditCardDetails = ({ name, creditLimit, balance }) => {
           {formatCurrency(creditLimit, 2)}.{" "}
         </span>
         Has usado{" "}
-        <span className={styles.currency}>{formatCurrency((creditLimit - balance), 2)} </span>
+        <span className={styles.currency}>
+          {formatCurrency(creditLimit - balance, 2)}{" "}
+        </span>
         de tu crédito disponible.
       </p>
       <div className={styles.progressBar}>
-        <progress max={creditLimit} value={balance}>
+        <progress max={creditLimit} value={creditLimit - balance}>
           {balance}
         </progress>
         <div>
-          <span>Crédito disponible</span>
-          <span>Límite de crédito</span>
+          <span className={styles.label}>Crédito usado</span>
+          <span className={styles.label}>Crédito disponible</span>
         </div>
         <div className={styles.balance}>
           <span className={styles.currency}>
-            {formatCurrency(balance, 2)}
+            {formatCurrency(creditLimit - balance, 2)}
           </span>
-          <span className={styles.currency}>
-            {formatCurrency(creditLimit, 2)}
-          </span>
+          <span className={styles.currency}>{formatCurrency(balance, 2)}</span>
         </div>
       </div>
     </div>
